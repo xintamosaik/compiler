@@ -1,43 +1,63 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
 
-int main(int argc, char const *argv[])
-{
-  if (argc == 1)
-  {
-    fprintf(stderr, "%s", "No filename to work with!");
-    return 1;
-  }
-  if (argc == 2)
-  {
-    puts(argv[1]); // filename
-  }
+#define INITIAL_BUFFER_SIZE 1024
 
-  FILE *fptr;
+char *read_file(const char *filename);
 
-  // Open a file in read mode
-  fptr = fopen(argv[1], "r");
-  // If the file exist
-  if (fptr == NULL)
-  {
-    fprintf(stderr, "%s", "file does not exist");
-    return 1;
-  }
+int main(int argc, char const *argv[]) {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
+        return 1;
+    }
 
-  // Store the content of the file
-  char content[1024 * 8];
-  int i = 0;
-  char current;
-  while ((current = fgetc(fptr)) != EOF)
-  {
-    content[i++] = current;
-  }
-  fclose(fptr);
-  
-  content[i++] = '\0';
-  printf("%s", content);
+    const char *filename = argv[1];
+    char *content = read_file(filename);
 
+    if (content == NULL) {
+        fprintf(stderr, "Failed to read file: %s\n", filename);
+        return 1;
+    }
 
-  
+    printf("%s\n", content);
+    free(content); // Free the allocated memory
+    return 0;
+}
 
-  return 0;
+char *read_file(const char *filename) {
+    FILE *fptr = fopen(filename, "r");
+    if (fptr == NULL) {
+        perror("Error opening file");
+        return NULL;
+    }
+
+    size_t buffer_size = INITIAL_BUFFER_SIZE;
+    char *content = malloc(buffer_size);
+    if (content == NULL) {
+        perror("Error allocating memory");
+        fclose(fptr);
+        return NULL;
+    }
+
+    size_t length = 0;
+    int current;
+    while ((current = fgetc(fptr)) != EOF) {
+        if (length + 1 >= buffer_size) {
+            buffer_size *= 2;
+            char *new_content = realloc(content, buffer_size);
+            if (new_content == NULL) {
+                perror("Error reallocating memory");
+                free(content);
+                fclose(fptr);
+                return NULL;
+            }
+            content = new_content;
+        }
+        content[length++] = current;
+    }
+    content[length] = '\0'; // Null-terminate the string
+
+    fclose(fptr);
+    return content;
 }
