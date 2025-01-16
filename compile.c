@@ -30,8 +30,8 @@ int main(int argc, char const *argv[])
     while(fgets(myString, 100, fptr)) {
       printf("%s", myString);
     }
-  // Print the file content
-  printf("%s", myString);
+
+
   // Close the file
   fclose(fptr);
   return 0;
