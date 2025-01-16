@@ -16,12 +16,11 @@ int main(int argc, char const *argv[])
   FILE *fptr;
 
   // Open a file in read mode
-  fptr = fopen("cheapy.md", "r");
+  fptr = fopen(argv[1], "r");
   // If the file exist
   if (fptr == NULL)
   {
     fprintf(stderr, "%s", "file does not exist");
-    
     return 1;
   }
 
