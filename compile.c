@@ -25,12 +25,16 @@ int main(int argc, char const *argv[])
   }
 
   // Store the content of the file
-  char myString[100];
-      // Read the content and print it
-    while(fgets(myString, 100, fptr)) {
-      printf("%s", myString);
-    }
-
+  char content[1024 * 8];
+  int i = 0;
+  char current;
+  // Read the content and print it
+  while ((current = fgetc(fptr)) != EOF)
+  {
+    content[i++] = current;
+  }
+  content[i++] = '\0';
+  printf("%s", content);
 
   // Close the file
   fclose(fptr);
