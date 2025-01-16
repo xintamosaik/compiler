@@ -9,7 +9,6 @@ int main(int argc, char const *argv[])
   }
   if (argc == 2)
   {
-    puts(argv[0]);
     puts(argv[1]); // filename
   }
 
@@ -28,15 +27,17 @@ int main(int argc, char const *argv[])
   char content[1024 * 8];
   int i = 0;
   char current;
-  // Read the content and print it
   while ((current = fgetc(fptr)) != EOF)
   {
     content[i++] = current;
   }
+  fclose(fptr);
+  
   content[i++] = '\0';
   printf("%s", content);
 
-  // Close the file
-  fclose(fptr);
+
+  
+
   return 0;
 }
