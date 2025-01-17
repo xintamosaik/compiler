@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
+// https://en.wikipedia.org/wiki/Lexical_analysis
+// https://en.wikipedia.org/wiki/Finite-state_machine
 
 int main(int argc, char const *argv[])
 {
