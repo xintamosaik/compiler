@@ -47,41 +47,62 @@ const char *token(char c)
   // Literal
 
   int code;
-  // if (isalnum(c)) printf("alphanumeric ");
-  const int is_alpha = isalpha(c);
-  const int is_blank = isblank(c);
-  const int is_cntrl = iscntrl(c);
-  const int is_digit = isdigit(c);
-  const int is_graph = isgraph(c);
-  const int is_lower = islower(c);
-  const int is_print = isprint(c);
-  const int is_punct = ispunct(c);
-  const int is_space = isspace(c);
-  const int is_upper = isupper(c);
-  if (is_graph)
+  if (isgraph(c))
+  {
     printf("\n'%c' (ASCII value %d) is ", c, c);
+  }
   else
+  {
+
     printf("\n_ _ (ASCII value %d) is ", c);
-  // if (is_lower) printf("lower "); // return LOWER
-  // if (is_upper) printf("upper "); // return UPPER
-  if (is_alpha)
+  }
+  if (isalpha(c))
+  {
     return "ALPHA";
-  if (is_digit)
+  }
+  if (isdigit(c))
+  {
     return "DIGIT";
-  // if (is_blank) printf("blank ");
+  }
 
-  // if (is_graph) printf("graph ");
-  // if (is_print) printf("print ");
-  // if (is_punct) printf("punct "); // return PUNCT
-  if (is_cntrl)
-    printf("control ");
-  if (is_blank)
+  if (isblank(c))
+  {
     return "SPACE";
+  }
 
-  // if (!is_cntrl && is_space && is_blank) printf("SPACE "); // is_blank is
-  // actually enough if (is_cntrl && is_space) printf("NEWLINE "); // return
+  switch (c)
+  {
+  case '=':
+  {
+    return "EQUAL";
+  }
+  case '.':
+  {
+    return "DOT";
+  }
+  case '(':
+  {
+    return "ROUND_PARENTHESIS_LEFT";
+  }
+  case ')':
+  {
+    return "ROUND_PARENTHESIS_RIGHT";
+  }
+  case '"':
+  {
+    return "DOUBLE_HYPHEN";
+  }
+  }
+  const int is_cntrl = iscntrl(c);
+  const int is_space = isspace(c);
+  if (is_cntrl && is_space)
+  {
+    return "NEWLINE"; // return
+  }
   if (is_cntrl && !is_space)
-    return EOF;
+  {
+    return "EOF";
+  }
   return "UNDEFINED";
 }
 int main(int argc, char const *argv[])
