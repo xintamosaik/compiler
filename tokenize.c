@@ -7,8 +7,7 @@
  * @param c char
  * @return string
  */
-const char *token(char c)
-{
+const char *token(char c) {
 
   // On a newline:
   // - If there is a new word(symbol)
@@ -47,72 +46,56 @@ const char *token(char c)
   // Literal
 
   int code;
-  if (isgraph(c))
-  {
+  if (isgraph(c)) {
     printf("\n'%c' (ASCII value %d) is ", c, c);
-  }
-  else
-  {
+  } else {
 
     printf("\n_ _ (ASCII value %d) is ", c);
   }
-  if (isalpha(c))
-  {
+  if (isalpha(c)) {
     return "ALPHA";
   }
-  if (isdigit(c))
-  {
+  if (isdigit(c)) {
     return "DIGIT";
   }
 
-  if (isblank(c))
-  {
+  if (isblank(c)) {
     return "SPACE";
   }
 
-  switch (c)
-  {
-  case '=':
-  {
+  switch (c) {
+  case '=': {
     return "EQUAL";
   }
-  case '.':
-  {
+  case '.': {
     return "DOT";
   }
-  case '(':
-  {
+  case '(': {
     return "ROUND_PARENTHESIS_LEFT";
   }
-  case ')':
-  {
+  case ')': {
     return "ROUND_PARENTHESIS_RIGHT";
   }
-  case '"':
-  {
+  case '"': {
     return "DOUBLE_HYPHEN";
   }
   }
   const int is_cntrl = iscntrl(c);
   const int is_space = isspace(c);
-  if (is_cntrl && is_space)
-  {
+  if (is_cntrl && is_space) {
     return "NEWLINE"; // return
   }
-  if (is_cntrl && !is_space)
-  {
+  if (is_cntrl && !is_space) {
     return "EOF";
   }
   return "UNDEFINED";
 }
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
   const char input[] = "name = \"Ulf\"\npi = 3.14\nlog(name)";
   const int input_length = sizeof(input);
 
   int i;
-  for (i = 0; i < input_length; i++)
-  {
+  for (i = 0; i < input_length; i++) {
     printf("%s", token(input[i]));
   }
   return 0;
