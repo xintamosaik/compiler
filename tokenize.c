@@ -8,7 +8,40 @@ int main(int argc, char const *argv[])
     
     int i;
     for (i = 0; i < input_length; i++) {
-     
+        // on a newline
+        // if there is a new word(symbol) we need a = and then a value to infer the type
+        // if it is a mutable it's ok to write var int a; 
+        // = and then value is ok too
+        // constant_thing = "something_different" is ok at this step (maybe)
+        // some_function(something, something else) is ok at this step too (maybe)
+        
+
+        // LOWER//UPPER//ALPHA <-- not important at each step
+        // DIGIT
+        // SPACE - MIGHT not actually matter
+        // PUNCT - maybe NEWLINE/SEMICOLON are more or less the same
+        // NEWLINE - KINDA JUST SPACE
+        // maybe NEWLINE/SEMICOLON are more or less the same
+    /**
+     * Operators (+, -, *, /, =, ==, etc.)
+Separators (;, ,, (, ), {, }, etc.)
+Comments ( single-line and multi-line 
+String literals (e.g., "Ulf")
+Keywords (e.g., if, while, return, etc.)
+Identifiers (e.g., variable names, function names)
+Numbers (integers, floating-point, hexadecimal, etc.)
+Whitespace (important for layout-sensitive languages)
+End of File (EOF)
+     */
+
+        // word
+        // number
+        // float
+        // hex
+        // identifier/symbol - function, variable, value
+        // keyword (reserved)
+        // literal
+
         int code;
         // if (isalnum(input[i])) printf("alphanumeric ");
         const int is_alpha = isalpha(input[i]);
