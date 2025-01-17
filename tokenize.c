@@ -95,8 +95,11 @@ int main(int argc, char const *argv[]) {
   const int input_length = sizeof(input);
 
   int i;
+  char* symbolic[input_length][30];
   for (i = 0; i < input_length; i++) {
-    printf("%s", token(input[i]));
+    // symbolic[i] = token(input[i]);
+    printf("%s",  token(input[i]));
   }
+  printf("%s", symbolic);
   return 0;
 }
